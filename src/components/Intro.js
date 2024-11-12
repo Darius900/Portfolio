@@ -145,7 +145,7 @@ const Intro = () => {
             <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <FaLinkedinIn />
             </a>
-            <a href="https://github.com/Darius939" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/Darius900" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <FaGithub />
             </a>
             <a href="mailto:dariuscojocaru123@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
