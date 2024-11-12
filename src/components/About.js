@@ -1,80 +1,75 @@
-import React, { useEffect } from 'react';
-import './About.css'; 
-import { FaGraduationCap, FaLaptopCode, FaRunning, FaReact, FaJsSquare, FaHtml5, FaCss3, FaNodeJs, FaGitAlt } from 'react-icons/fa';
-import aaaImage from './aab.png'; 
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { Link } from "react-scroll";
+import React from 'react';
+import './About.css';
+import { Link } from 'react-scroll';
+import { FaCheckCircle, FaReact, FaJsSquare, FaHtml5, FaCss3Alt, FaNodeJs, FaGitAlt, FaBook, FaBriefcase, FaHeart } from 'react-icons/fa';
 
 const About = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 2000,
-    });
-  }, []);
-
   return (
-    <div id="about">
-      <div className="about-section" data-aos="fade-up">
+    <section id="about" className="about-section">
+      <div className="about-container">
+        <h1 className="section-title-about">About Me</h1>
+        <p className="about-description">
+          As a recent graduate in Economic Informatics from Romania, I'm passionate about leveraging technology to solve real-world problems and create impactful digital solutions. My determination and interest in innovation fuel my readiness for new challenges and opportunities in the ever-evolving tech landscape.
+        </p>
+
         <div className="about-content">
-          <div className="about-image-container">
-            <div className="about-image">
-              <img src={aaaImage} className="image-shadow" alt="Professional Headshot" />
-              <img src={aaaImage} alt="Professional Headshot" />
+          <div className="about-subsection">
+            <h2 className="subsection-title"><FaCheckCircle className="icon" /> Core Values</h2>
+            <ul className="values-list">
+              <li>Integrity in all interactions</li>
+              <li>Continuous learning and growth</li>
+              <li>Innovation-driven problem solving</li>
+              <li>Collaboration and teamwork</li>
+            </ul>
+          </div>
+
+          <div className="about-subsection">
+            <h2 className="subsection-title"><FaReact className="icon" /> Tech Stack</h2>
+            <div className="tech-stack">
+              <span><FaReact /> React</span>
+              <span><FaJsSquare /> JavaScript</span>
+              <span><FaHtml5 /> HTML5</span>
+              <span><FaCss3Alt /> CSS3</span>
+              <span><FaNodeJs /> Node.js</span>
+              <span><FaGitAlt /> Git</span>
             </div>
           </div>
-          <div className="about-text-container">
-            <div className="about-text">
-              <h2 className="about-name">Nice to meet you!</h2>
-              <p className="about-intro">
-                As a recent graduate in Economic Informatics from Romania, I'm eager to leverage my skills to solve real-world problems and create impactful digital solutions. My determination and interest in technology fuel my readiness for new challenges and opportunities.
-              </p>
-              <div className="skills">
-              <FaReact size={40} />
-                  <FaJsSquare size={40} />
-                  <FaHtml5 size={40} />
-                  <FaCss3 size={40} />
-                  <FaNodeJs size={40} />
-                  <FaGitAlt size={40} />
-              </div>
-              <div className="about-info">
-                <div className="info-item">
-                  <FaGraduationCap size="1.5em" />
-                  <p>
-                    My education in Economic Informatics trained me to be a problem-solver. I'm now broadening my knowledge by pursuing a Master's degree in the same field.
-                  </p>
-                </div>
-                <div className="info-item">
-                  <FaLaptopCode size="1.5em" />
-                  <p>
-                    I've developed a full-stack e-commerce platform using React and Express. As a Web Developer, I am dedicated to creating efficient and innovative digital solutions.
-                  </p>
-                </div>
-                <div className="info-item">
-                  <FaRunning size="1.5em" />
-                  <p>
-                  Outside my professional interests, I'm a sports enthusiast with a special love for table tennis. I also enjoy going to the gym, gaming, and I have a passion for mountain-related activities.                 </p>
-                </div>
-              </div>
-              <div className="about-hobbies">
-                <h3>My Core Values</h3>
-                <p>Integrity is at the heart of my personal and professional interactions. I believe in honesty, sincerity, and a relentless pursuit of hard work.</p>       
 
-                <Link
-                  to="projects"  
-                  smooth={true} 
-                  offset={10}  
-                  duration={500} 
-                  className="see-projects-btn" 
-                >
-                   Check out my projects! <span className="arrow">&darr;</span>
-                </Link>
-              </div>
-            </div>
+          <div className="about-subsection">
+            <h2 className="subsection-title"><FaBook className="icon" /> Education</h2>
+            <p>
+              Graduated in Economic Informatics, currently pursuing a Master's degree in the same field.
+            </p>
+          </div>
+
+          <div className="about-subsection">
+            <h2 className="subsection-title"><FaBriefcase className="icon" /> Experience</h2>
+            <p>
+              Developed a full-stack e-commerce platform using React and Express, focusing on efficient and innovative solutions.
+            </p>
+          </div>
+
+          <div className="about-subsection">
+            <h2 className="subsection-title"><FaHeart className="icon" /> Interests</h2>
+            <p>
+              Sports enthusiast with a love for table tennis, gym workouts, gaming, and mountain activities.
+            </p>
           </div>
         </div>
+
+        <Link
+          activeClass="active"
+          to="projects"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          className="explore-button"
+        >
+          Explore My Projects
+        </Link>
       </div>
-    </div>
+    </section>
   );
 };
 

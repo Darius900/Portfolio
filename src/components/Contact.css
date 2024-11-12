@@ -1,19 +1,27 @@
 .Contact {
-  padding: 80px 0;
-  background-color: #000;
+  padding: 80px 20px;
+  background-color: #0d0d0d;
   text-align: center;
+  position: relative;
+  z-index: 10;
 }
 
 .Contact h1 {
-  font-size: 36px;
-  margin-bottom: 60px;
+  font-size: 40px;
+  margin-bottom: 20px;
   color: #fff;
+}
+
+.Contact-subtext {
+  font-size: 18px;
+  margin-bottom: 50px;
+  color: #aaa;
 }
 
 .Contact-content {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-around;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -25,22 +33,23 @@
 .info-box {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .info-box svg {
-  font-size: 24px;
+  font-size: 28px;
   margin-right: 10px;
   color: #fff;
 }
 
 .info-box p {
-  font-size: 18px;
+  font-size: 20px;
   color: #ccc;
 }
 
 .Contact-form {
   width: 60%;
+  max-width: 600px;
 }
 
 .Contact-field {
@@ -51,19 +60,26 @@
 .Contact-field label {
   display: block;
   font-size: 18px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   color: #fff;
 }
 
 .Contact-field input,
 .Contact-field textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   background-color: #222;
   color: #fff;
   border: none;
   border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.Contact-field input:focus,
+.Contact-field textarea:focus {
+  background-color: #333;
+  outline: none;
 }
 
 .Contact-field textarea {
@@ -71,18 +87,28 @@
 }
 
 .Contact-submit {
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 18px;
   background-color: #fff;
   color: #000;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .Contact-submit:hover {
-  background-color: #ccc;
+  background-color: #f0f0f0;
+}
+
+.Contact-success {
+  color: #4caf50;
+  margin-top: 10px;
+}
+
+.Contact-error {
+  color: #f44336;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 768px) {
@@ -94,9 +120,6 @@
   .Contact-info,
   .Contact-form {
     width: 100%;
-  }
-
-  .Contact-info {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 }

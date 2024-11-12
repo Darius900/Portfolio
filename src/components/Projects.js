@@ -1,47 +1,60 @@
-import { FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaDatabase, FaCss3, FaHtml5  } from 'react-icons/fa';
+// Projects.js
+
+import React from 'react';
+import { 
+  FaGithub, 
+  FaExternalLinkAlt, 
+  FaReact, 
+  FaNodeJs, 
+  FaDatabase, 
+  FaCss3Alt, 
+  FaHtml5 
+} from 'react-icons/fa';
+import { SiMysql } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import './Projects.css';
-import aaaImage from './MUNTEX.png';
-import romarketplace from './romarketplace.png';
-import TT from './TT.jpg'
-import portofolio from './portofolio.png'
-import { SiMysql } from 'react-icons/si';
+import muntexImage from './MUNTEX1.png';
+import romarketplaceImage from './romarketplace1.png';
+import tableTennisImage from './TT.jpg';
+import portfolioImage from './portofolio1.png'; // Corrected spelling
 
-const container = {
-  hidden: { opacity: 0 },
+// Define animation variants
+const containerVariants = {
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.4,
+      staggerChildren: 0.2,
     }
   }
-}
+};
 
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
     y: 0,
-    opacity: 1,
     transition: {
-      duration: 0.3,
+      duration: 0.6,
+      ease: 'easeOut'
     }
   }
-}
+};
 
-const Project = ({ project, index }) => {
-  const techIcons = {
-    "React": <FaReact />,
-    "Node.js": <FaNodeJs />,
-    "Express": <FaNodeJs />,
-    "SQLite": <FaDatabase />,
-    "MySQL": <SiMysql />,
-    "CSS": <FaCss3 />,
-    "HTML": <FaHtml5/>,
-    
-  }
+// Mapping technology names to icons
+const techIcons = {
+  "React": <FaReact title="React" />,
+  "Node.js": <FaNodeJs title="Node.js" />,
+  "Express": <FaNodeJs title="Express" />,
+  "SQLite": <FaDatabase title="SQLite" />,
+  "MySQL": <SiMysql title="MySQL" />,
+  "CSS": <FaCss3Alt title="CSS3" />,
+  "HTML": <FaHtml5 title="HTML5" />,
+  // Add more technologies as needed
+};
 
+// Project Card Component
+const ProjectCard = ({ project }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
@@ -49,79 +62,112 @@ const Project = ({ project, index }) => {
 
   return (
     <motion.div 
-      className={`project-section ${index % 2 === 0 ? '' : 'reverse'}`} 
-      ref={ref} 
-      variants={container} 
-      initial='hidden' 
-      animate={inView ? 'visible' : 'hidden'}
+      className="project-card" 
+      ref={ref}
+      variants={cardVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      whileHover={{ scale: 1.05 }}
     >
-      <motion.div className="project-image" variants={item}>
-        <img src={project.image} className="image-shadow" alt={project.title} />
-        <img src={project.image} alt={project.title} />
-      </motion.div>
-      <motion.div className="project-info" variants={item}>
-        <h2>{project.title}</h2>
-        <p>{project.description}</p>
-        <motion.p className="tech-icons" variants={item}>
-          {project.technologies.map(tech => techIcons[tech])}
-        </motion.p>
-        <motion.div className="project-links" variants={item}>
-          <a href={project.link} target="_blank" rel="noreferrer">
-            <FaExternalLinkAlt/> View Live
-          </a>
-          <a href={project.code} target="_blank" rel="noreferrer">
-            <FaGithub/> View Code
-          </a>
-        </motion.div>
-      </motion.div>
+      <div className="project-image-container">
+        <img 
+          src={project.image} 
+          alt={`${project.title} Screenshot`} 
+          loading="lazy" 
+          className="project-image"
+        />
+        <div className="overlay">
+          <div className="overlay-content">
+            {project.link && (
+              <a href={project.link} target="_blank" rel="noreferrer" aria-label={`${project.title} Live Site`}>
+                <FaExternalLinkAlt /> Live Demo
+              </a>
+            )}
+            {project.code && (
+              <a href={project.code} target="_blank" rel="noreferrer" aria-label={`${project.title} Source Code`}>
+                <FaGithub /> Source Code
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="project-details">
+        <h3 className="project-title">{project.title}</h3>
+        <p className="project-description">{project.description}</p>
+        <div className="project-technologies">
+          {project.technologies.map((tech, idx) => (
+            techIcons[tech] ? (
+              <span key={idx} className="tech-icon">
+                {techIcons[tech]}
+              </span>
+            ) : (
+              <span key={idx} className="tech-text">
+                {tech}
+              </span>
+            )
+          ))}
+        </div>
+      </div>
     </motion.div>
-  )
-}
+  );
+};
 
+// Main Projects Component
 const Projects = () => {
   const projects = [
     {
+      id: 1,
       title: 'Muntex E-commerce Platform [Fullstack]',
       description: 'A full-stack e-commerce platform where users can register, login, add products to cart, place orders, pay with Stripe or cash on delivery, request refunds, and change passwords. The admin dashboard allows for managing products, stocks, orders, refund requests, employees, and providers.',
-      technologies: ['React', 'SQLite', 'Express', 'HTML','CSS'],
+      technologies: ['React', 'SQLite', 'Express', 'HTML', 'CSS'],
       link: 'https://darius900.github.io/MUNTEX/',
       code: 'https://github.com/Darius900/MUNTEX/tree/master',
-      image: aaaImage
+      image: muntexImage
     },
     {
+      id: 2,
       title: 'Table Tennis Shop [Frontend]',
       description: 'A frontend implementation for a table tennis shop, featuring a main page, header carousel, products page, and product categories.',
       technologies: ['React', 'HTML', 'CSS'],
       link: 'https://darius900.github.io/TT/',
       code: 'https://github.com/Darius900/TT/tree/master',
-      image: TT
+      image: tableTennisImage
     },
     {
+      id: 3,
       title: 'Personal Portfolio',
       description: 'A personal portfolio website with a black and white theme, particles on the main page, cool scroll transitions, and a minimalist, clean design.',
       technologies: ['React', 'HTML', 'CSS'],
-      link: 'https://darius900.github.io/Portofolio/',
-      code: 'https://github.com/Darius900/Portofolio/tree/master',
-      image: portofolio
+      link: 'https://darius900.github.io/Portfolio/',
+      code: 'https://github.com/Darius900/Portfolio/tree/master',
+      image: portfolioImage
     },
     {
+      id: 4,
       title: 'Marketplace [Fullstack] (In Progress)',
       description: 'A full-stack marketplace where users can register as sellers or buyers. Sellers can create and customize shops, add products, and manage orders and statistics.',
       technologies: ['React', 'Express', 'MySQL', 'HTML', 'CSS'],
       link: 'https://darius900.github.io/ROMARKETPLACE/',
       code: 'https://github.com/Darius900/ROMARKETPLACE/tree/master',
-      image: romarketplace
+      image: romarketplaceImage
     }
   ];
 
   return (
-    <div className="projects" id="projects">
-      <h1>Projects</h1>
-      {projects.map((project, index) => (
-        <Project project={project} index={index} key={index} />
-      ))}
-    </div>
+    <section className="projects" id="projects">
+      <h2 className="section-title">My Projects</h2>
+      <motion.div 
+        className="projects-grid"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {projects.map(project => (
+          <ProjectCard project={project} key={project.id} />
+        ))}
+      </motion.div>
+    </section>
   );
-}
+};
 
 export default Projects;
